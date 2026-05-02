@@ -19,8 +19,11 @@ class Item(db.Model):
     name = db.Column(db.String(120), nullable=False)
 
 
+
+
 with app.app_context():
     db.create_all()
+    # app context = make Flask aware of the current app while running code outside a request.
 
 
 @app.post("/items")

@@ -21,6 +21,16 @@ def create_token(email: str) -> str:
 
 
 def jwt_required(handler):
+
+    # Decorator = function that wraps another function
+# wrapper = the new function that runs instead
+# *args, **kwargs = allows wrapper to work with ANY function
+
+
+# @my_decorator
+# def say_hello(): 
+# say_hello = my_decorator(say_hello)
+
     @wraps(handler)
     def wrapper(*args, **kwargs):
         auth_header = request.headers.get("Authorization", "")
