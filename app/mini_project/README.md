@@ -1,4 +1,4 @@
-# Mini Project - Task Tracker
+# Mini Project - Task Tracker (After Examples)
 
 This mini project uses:
 - Flask app factory + blueprints
@@ -7,6 +7,8 @@ This mini project uses:
 - JWT auth (PyJWT)
 - RBAC decorators
 - Separate frontend
+
+If you are brand new, start with `examples/01_basics` first.
 
 ## Backend Setup
 

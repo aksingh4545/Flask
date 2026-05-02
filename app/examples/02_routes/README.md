@@ -6,6 +6,14 @@ What you learn:
 - Query params
 - Error handlers
 
+## Install
+
+```
+python -m venv .venv
+.venv\Scripts\activate
+pip install Flask
+```
+
 ## Run
 
 ```

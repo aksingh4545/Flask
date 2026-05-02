@@ -1,43 +1,32 @@
 from __future__ import annotations
 
 from functools import wraps
-from time import perf_counter
-from flask import Flask, jsonify, request, Response
+from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 app.config["APP_NAME"] = "Flask Basics"
 
 
-def timing_decorator(func):
-    """Measure how long a request handler takes and return time in a header."""
+def log_call(func):
+    """A tiny decorator to show how wrapping a route works."""
 
     @wraps(func)
     def wrapper(*args, **kwargs):
-        start = perf_counter()
-        response = func(*args, **kwargs)
-        elapsed_ms = (perf_counter() - start) * 1000
-
-        # Ensure we always have a Response object to attach headers.
-        if isinstance(response, Response):
-            response.headers["X-Elapsed-ms"] = f"{elapsed_ms:.2f}"
-            return response
-
-        flask_response = app.make_response(response)
-        flask_response.headers["X-Elapsed-ms"] = f"{elapsed_ms:.2f}"
-        return flask_response
+        print(f"Running {func.__name__}")
+        return func(*args, **kwargs)
 
     return wrapper
 
 
 @app.route("/")
-@timing_decorator
+@log_call
 def index():
     """A basic handler function that returns a string."""
     return f"Welcome to {app.config['APP_NAME']}"
 
 
 @app.route("/greet")
-@timing_decorator
+@log_call
 def greet():
     """Read query parameters using request.args."""
     name = request.args.get("name", "World")
@@ -45,7 +34,7 @@ def greet():
 
 
 @app.route("/sum/<int:a>/<int:b>")
-@timing_decorator
+@log_call
 def add(a: int, b: int):
     """Route variables are parsed and passed to the function."""
     return jsonify(result=a + b)

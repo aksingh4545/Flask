@@ -1,100 +1,122 @@
-# Detailed Explanations
+# Beginner Guide and Explanations
 
-This guide explains the code in each example and the mini project. Use it alongside the source files.
+This file explains each example in simple language. Read it side-by-side with the code.
+
+## How To Use This Guide
+
+1) Start with `examples/01_basics` and run the app.
+2) Read the notes for that example below.
+3) Move to the next example only after you understand the current one.
 
 ## 1) Basics (Functions, Decorators, App Setup)
 
 Files:
 - `examples/01_basics/app.py`
 
-Key ideas:
-- `app = Flask(__name__)` creates the WSGI app instance.
-- A **view function** is just a Python function attached to a route.
-- `@app.route("/path")` maps URL -> function.
-- The custom `timing_decorator` uses `functools.wraps` so Flask keeps the original function name. This matters for debugging and for internal routing.
-- Responses can be a `str`, a `dict` wrapped by `jsonify`, or a `Response` object. The decorator normalizes responses so it can attach headers consistently.
+What you see:
+- `app = Flask(__name__)` creates the application object.
+- A view function is just a normal Python function.
+- `@app.route("/")` connects a URL to a function.
+- A tiny decorator wraps a route so you can see how decorators work in Flask.
+
+Why it matters:
+- Flask routes are normal Python functions, which makes the framework easy to learn.
 
 ## 2) Routes
 
 Files:
 - `examples/02_routes/app.py`
 
-Key ideas:
-- Route parameters like `<int:item_id>` are automatically converted to Python types.
-- `methods=["GET", "POST"]` limits which HTTP methods a handler accepts.
-- `request.args` reads query parameters like `?include=details`.
-- `@app.errorhandler(404)` overrides Flask's default 404 response and returns JSON instead of HTML.
+What you see:
+- `<int:item_id>` turns a URL segment into an integer argument.
+- `methods=["GET", "POST"]` tells Flask which HTTP verbs are allowed.
+- `request.args` reads query parameters.
+
+Why it matters:
+- This is how you build clean URLs and accept input from the browser.
 
 ## 3) API
 
 Files:
 - `examples/03_api/app.py`
 
-Key ideas:
-- `request.get_json(silent=True)` reads JSON safely and avoids exceptions.
-- The endpoint returns JSON and a status code `(data, 201)` for created resources.
-- `Flask-Cors` enables browser-based frontends to call the API from another origin.
+What you see:
+- `request.get_json(silent=True)` safely reads JSON.
+- `jsonify(...)` returns JSON responses.
+- CORS is enabled so a separate frontend can call the API.
+
+Why it matters:
+- Most modern apps use JSON APIs. This is the smallest working version.
 
 ## 4) CRUD
 
 Files:
 - `examples/04_crud/app.py`
 
-Key ideas:
-- `Flask-SQLAlchemy` provides `db.Model` as a base class for ORM models.
-- `db.session.add(...)` queues an insert; `db.session.commit()` persists it.
-- `GET /items` lists rows and formats them as JSON.
-- `PATCH /items/<id>` updates only the fields provided.
-- `DELETE /items/<id>` removes the row.
+What you see:
+- A simple SQLAlchemy model.
+- Create, read, update, and delete routes.
+
+Why it matters:
+- CRUD is the backbone of most real applications.
 
 ## 5) Database
 
 Files:
 - `examples/05_database/app.py`
 
-Key ideas:
-- `db.session.execute("SELECT 1")` is a lightweight health check.
-- A tiny `User` model shows how you define columns, types, and constraints.
+What you see:
+- A health check query and a tiny `User` table.
+
+Why it matters:
+- This is the simplest way to confirm your database works.
 
 ## 6) Session Authentication
 
 Files:
 - `examples/06_auth_sessions/app.py`
 
-Key ideas:
-- `Flask-Login` stores a user id in the session cookie.
-- `login_user(user)` marks the user as authenticated for future requests.
-- `@login_required` guards endpoints that should only be accessed when logged in.
-- Passwords are stored as secure hashes (never plain text).
+What you see:
+- `Flask-Login` stores a user id in a session cookie.
+- `@login_required` protects a route.
+
+Why it matters:
+- Session auth is common for classic web apps.
 
 ## 7) JWT Authentication
 
 Files:
 - `examples/07_auth_jwt/app.py`
 
-Key ideas:
-- JWTs are signed tokens that contain a subject (`sub`) and expiration (`exp`).
-- A `Bearer <token>` header is required for protected routes.
-- The decorator verifies the token and rejects expired or invalid tokens.
+What you see:
+- A token is created on login.
+- The token is sent in the `Authorization` header.
+
+Why it matters:
+- JWTs are common for mobile apps and separate frontends.
 
 ## 8) RBAC
 
 Files:
 - `examples/08_rbac/app.py`
 
-Key ideas:
-- RBAC is enforced using a decorator that checks the caller role.
-- A role maps to a set of permissions like `read`, `write`, `delete`.
-- If a permission is missing, a `403` response is returned.
+What you see:
+- Roles map to permissions like `read` or `write`.
+- A decorator checks permissions before a route runs.
+
+Why it matters:
+- RBAC is how teams control who can do what.
 
 ## 9) Other
 
 Files:
 - `examples/09_other/app.py`
 
-Key ideas:
-- `@app.cli.command` adds custom CLI commands to your Flask app.
-- Configuration via environment variables keeps secrets out of the code.
+What you see:
+- A custom CLI command and a simple config value.
+
+Why it matters:
+- CLI tools and config make real apps easier to maintain.
 
 ## Mini Project (Task Tracker)
 
@@ -105,14 +127,10 @@ Files:
 - `mini_project/backend/app/rbac/decorators.py`
 - `mini_project/backend/app/models.py`
 
-Key ideas:
-- **App factory pattern**: `create_app()` builds the app with config, extensions, and blueprints.
-- **Blueprints**: `auth`, `api`, and `main` split routes into modules.
-- **Session auth**: `POST /auth/login` stores the session cookie.
-- **JWT auth**: `POST /auth/token` returns a signed token.
-- **RBAC**: `require_permission` uses the user role to allow or block updates and deletes.
-- **Tasks API**: authenticated users can create and view their own tasks.
+What you see:
+- App factory pattern and blueprints.
+- Session login and JWT token endpoints.
+- RBAC checks on update and delete.
 
-Frontend:
-- `mini_project/frontend/index.html` + `app.js` show a simple login + task manager UI.
-- The frontend stores the JWT in memory and uses it for API calls.
+Why it matters:
+- This shows how small examples grow into a real project layout.
