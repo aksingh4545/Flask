@@ -1,0 +1,50 @@
+body {
+  font-family: "Times New Roman", serif;
+  margin: 0;
+  background: linear-gradient(140deg, #fdf6e3, #eef7ff);
+  color: #1f2a44;
+}
+
+.page {
+  max-width: 920px;
+  margin: 30px auto;
+  padding: 20px;
+}
+
+.hero {
+  background: #10284e;
+  color: #f9f2d2;
+  padding: 18px 22px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.panel {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+input {
+  padding: 8px 10px;
+  margin-right: 6px;
+  border: 1px solid #cfd6e4;
+  border-radius: 6px;
+}
+
+button {
+  background: #2f5d9b;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.token {
+  margin-top: 8px;
+  font-size: 12px;
+  word-break: break-all;
+}

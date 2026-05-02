@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Task Tracker</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="hero">
+        <h1>Task Tracker</h1>
+        <p>JWT login + tasks API (Flask backend)</p>
+      </header>
+
+      <section class="panel">
+        <h2>Login</h2>
+        <input id="email" type="email" placeholder="email" />
+        <input id="password" type="password" placeholder="password" />
+        <button id="login">Get Token</button>
+        <div class="token" id="token"></div>
+      </section>
+
+      <section class="panel">
+        <h2>Create Task</h2>
+        <input id="taskTitle" type="text" placeholder="task title" />
+        <button id="createTask">Create</button>
+      </section>
+
+      <section class="panel">
+        <h2>Your Tasks</h2>
+        <button id="loadTasks">Load Tasks</button>
+        <ul id="taskList"></ul>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

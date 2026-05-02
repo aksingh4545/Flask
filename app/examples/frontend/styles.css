@@ -1,0 +1,28 @@
+body {
+  font-family: Georgia, serif;
+  background: linear-gradient(120deg, #f8f3e7, #f0f7ff);
+  margin: 0;
+}
+
+.page {
+  max-width: 720px;
+  margin: 40px auto;
+  padding: 24px;
+}
+
+.card {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+button {
+  padding: 8px 16px;
+  border: none;
+  background: #1f4b99;
+  color: #ffffff;
+  border-radius: 6px;
+  cursor: pointer;
+}
